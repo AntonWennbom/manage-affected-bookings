@@ -2,10 +2,10 @@
 
 namespace ManageAffectedBookings.Application.Models;
 
-public class Equipment(Guid id, string name, string description, ToolType toolType)
+public class Equipment()
 {
-    public Guid Id = id;
-    public string Name = name;
-    public string Description = description;
-    public ToolType ToolType = toolType;
+    public Guid Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public ToolType ToolType { get; set; }
 }

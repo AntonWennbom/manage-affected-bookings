@@ -2,10 +2,10 @@
 
 namespace ManageAffectedBookings.Application.Models;
 
-public class EquipmentItem(Guid id, Guid equipmentId, EquipmentStatus status, string? unavailableReason)
+public class EquipmentItem()
 {
-    public Guid Id = id;
-    public Guid EquipmentId = equipmentId;
-    public EquipmentStatus Status = status;
-    public string? UnavailableReason = unavailableReason;
+    public Guid Id { get; set; }
+    public Guid EquipmentId { get; set; }
+    public EquipmentStatus Status { get; set; }
+    public string? UnavailableReason { get; set; }
 }

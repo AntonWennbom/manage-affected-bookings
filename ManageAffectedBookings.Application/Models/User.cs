@@ -2,11 +2,11 @@
 
 namespace ManageAffectedBookings.Application.Models;
 
-public class User(Guid id, string name, string email, string phone, Roles role)
+public class User()
 {
-    public Guid Id = id;
-    public string Name = name;
-    public string Email = email;
-    public string Phone = phone;
-    public Roles Role = role;
+    public Guid Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string Phone { get; set; } = string.Empty;
+    public Roles Role { get; set; }
 }
