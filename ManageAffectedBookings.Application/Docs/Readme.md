@@ -286,7 +286,7 @@ När jag skulle börja med implementationen av US-25 så tänkte jag att det kan
 * Hämta bokningar för (guid exemplarId)
 * Skapa BookingService
 * Filtrera till endast aktiva bokningar sluttid >= idag
-* Lista alla bokningar med (guid Id, string CustomerName, string CustomerEmail, string CustomerPhone, BookingPeriod bookingPeriod)
+* Lista alla berörda bokningar (guid Id, string CustomerName, string CustomerEmail, string CustomerPhone, BookingPeriod bookingPeriod)
 * Visa "Inga bokningar berörs" när listan är tom
 ---
 
