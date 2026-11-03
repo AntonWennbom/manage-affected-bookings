@@ -158,7 +158,7 @@ end
 
 ```
 
-![Sekvensdiagramn 24](Images/SD-24.png)
+![Sekvensdiagram 24](Images/SD-24.png)
 
 ### Sekvensdiagram SD-24-25
 
@@ -234,7 +234,7 @@ end
 
 @enduml
 ```
-![Sekvensdiagramn 24-25](Images/SD-24-25.png)
+![Sekvensdiagram 24-25](Images/SD-24-25.png)
 
 ### Insikter
 
@@ -285,9 +285,10 @@ När jag skulle börja med implementationen av US-25 så tänkte jag att det kan
 ### Att göra för implementation S-25:
 * Hämta bokningar för (guid exemplarId)
 * Skapa BookingService
-* Filtrera till endast aktiva bokningar sluttid >= idag
+* Filtrera till endast aktiva bokningar sluttid >= dagens datum
 * Lista alla berörda bokningar (guid Id, string CustomerName, string CustomerEmail, string CustomerPhone, BookingPeriod bookingPeriod)
 * Visa "Inga bokningar berörs" när listan är tom
+
 ---
 
 ## Diskussionsunderlag för möte inför itteration 2
@@ -309,3 +310,31 @@ Bokningens slutdatum >= dagens datum
 Det blir påverkan på implementationen
 
 ---
+
+autonumber
+activate
+deactivate
+
+---
+3. Implementera och verifiera designen (VG)
+För VG ska du dessutom implementera den modellerade funktionaliteten i ett objektorienterat programmeringsspråk (C#/.NET).
+
+Implementationen ska innehålla de klasser, objekt och metoder som behövs för att genomföra det valda flödet. Ansvarsfördelningen och objektens samverkan ska gå att följa mellan koden och sekvensdiagrammet.
+
+En enkel konsolapplikation räcker. Det krävs inget grafiskt gränssnitt, ingen databas och inga externa tjänster. Data får lagras i minnet.
+
+Verifiera minst:
+
+Ett scenario där huvudflödet genomförs.
+Ett scenario där det alternativa flödet inträffar.
+Du väljer själv om verifieringen sker genom manuella körningar, automatiserade tester eller en kombination. Automatiserade tester är inget krav. Koden som du skrivit ska finnas publicerat på en publik GitHub repository och länken till detta/dessa repositories ska finnas med i dokumentationen som lämnas in.
+
+---
+4. Analysera resultatet (VG)
+Beskriv kortfattat:
+
+Hur verifieringen visar att funktionaliteten följer aktivitetsdiagrammet.
+Hur implementationens objekt och metodanrop motsvarar sekvensdiagrammet.
+Om ansvarsfördelningen fungerade som tänkt.
+Vilka förändringar du gjorde och varför.
+Om implementationen visar att designen behöver ändras ska du uppdatera diagrammen. Redovisa vad som ändrades och motivera beslutet. Vilket är något som även tas med i grupparbetet sen under punkt 6.
