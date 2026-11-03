@@ -5,6 +5,6 @@ public enum ToolType
     Drill,
     Hammer,
     Screwdriver,
-    JiggSaw,
+    Jigsaw,
     Sander
 }
