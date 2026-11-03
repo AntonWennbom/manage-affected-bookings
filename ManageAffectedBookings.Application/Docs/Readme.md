@@ -46,6 +46,8 @@ stop
 
 ```
 
+![Aktivitetsdiagram 24](Images/AD-24.png)
+
 ### Aktivitetsdiagram 24-25
 
 
@@ -99,6 +101,8 @@ stop
 @enduml
 ```
 
+![Aktivitetsdiagram 24-24](Images/AD-24-25.png)
+
 ### Sekvensdiagram SD-24
 
 ```plantuml
@@ -107,45 +111,44 @@ stop
 
 actor Personal
 
-participant Frontend
-participant Backend
+participant UI
+participant API
 database Database
 
-Personal -> Frontend : Markera exemplar\nsom otillgängligt
-Personal -> Frontend : Ange orsak
+Personal -> UI : Markera exemplar som otillgängligt
+Personal -> UI : Ange orsak
 
-Frontend -> Backend : MarkeraOtillgänglig(exemplarId, orsak)
+UI -> API : MarkeraOtillgänglig(exemplarId, orsak)
 
 alt Orsak saknas
 
-    Backend --> Frontend : Valideringsfel
-    Frontend --> Personal : Orsak måste anges
+    API --> UI : Valideringsfel
+    UI --> Personal : Orsak måste anges
 
 else Orsak finns
 
-    Backend -> Backend : Kontrollera behörighet
+    API -> API : Kontrollera personalbehörighet
 
     alt Behörighet saknas
 
-        Backend --> Frontend : 403 Forbidden
-        Frontend --> Personal : Åtkomst nekad
+        API --> UI : 403 Forbidden
+        UI --> Personal : Åtkomst nekad
 
     else Behörighet OK
 
-        Backend -> Database : Uppdatera status
-        Backend -> Database : Spara orsak
+        API -> Database : Spara status och orsak
 
-        Database --> Backend : OK
+        Database --> API : OK
 
-        note over Backend
+        note over API
         VR10:
-        Bokningar får inte
-        avbokas automatiskt
+        Befintliga bokningar
+        avbokas inte automatiskt
         end note
 
-        Backend --> Frontend : Exemplar uppdaterat
+        API --> UI : Exemplar uppdaterat
 
-        Frontend --> Personal : Status sparad
+        UI --> Personal : Status sparad
 
     end
 
@@ -154,6 +157,8 @@ end
 @enduml
 
 ```
+
+![Sekvensdiagramn 24](Images/SD-24.png)
 
 ### Sekvensdiagram SD-24-25
 
@@ -229,7 +234,7 @@ end
 
 @enduml
 ```
-
+![Sekvensdiagramn 24-25](Images/SD-24-25.png)
 
 ### Insikter
 
@@ -259,9 +264,30 @@ till: **Backend - Hämta alla bokningar där Bokningens slutdatum >= dagens datu
 När jag skulle börja med implementationen av US-25 så tänkte jag att det kanske är lättre att även ta med US-24 
 
 ---
-### Att göra för implementation:
-* 
+### Att göra för implementation S-24:
+* Skapa enum ToolType example. (Drill, Digger, Jigsaw, Sander)
+* Skapa enum ExemplarStatus (Available, Unavailable)
+* Skapa modell för Utrustning (guid Id, string name, string, Description, ToolType toolType)
+* Skapa modell för Exemplar (guid id, guid UtrustningsId, ExemplarStatus Status, string? UnavailableReason) 
+* Skapa enum Role (customer, employee, admin)
+* Skapa modell för Inloggad (guid Id, string Kundnamn, string Email, string Phone, Role role)
+* Skapa enum BookingStatus (Confirmed, Cancelled, Completed)
+* Skapa modell för BookingPeriod (DateOnly start, DateOnly end)
+* Skapa modell för bokning (guid Id, Exemplar exemplar, guid KundId, BookingStatus Status, BookingPeriod bookinngPeriod)
+* Skapa Record UnavailableRequest för att markera utrustning otillgänglig (guid id, string reason)
+* Validera att Request är korrekt ifylld
+* Komponent för att visa felmeddelanden
+* Visa bekräftelse när exemplar markerats som otillgängligt
+* Validering av behörighet för att ändra
+* Spara status och orsak för exemplar
 
+---
+### Att göra för implementation S-25:
+* Hämta bokningar för (guid exemplarId)
+* Skapa BookingService
+* Filtrera till endast aktiva bokningar sluttid >= idag
+* Lista alla bokningar med (guid Id, string CustomerName, string CustomerEmail, string CustomerPhone, BookingPeriod bookingPeriod)
+* Visa "Inga bokningar berörs" när listan är tom
 ---
 
 ## Diskussionsunderlag för möte inför itteration 2
