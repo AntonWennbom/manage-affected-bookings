@@ -9,7 +9,10 @@ public class EquipmentService(List<EquipmentItem> items)
 
     public bool MarkUnavailable(Guid id, string reason)
     {
-        var item = _items.FirstOrDefault(x => x.Id == id);
+        if (string.IsNullOrWhiteSpace(reason))
+            throw new ArgumentException("Reason cannot be null or empty.");
+
+        var item = _items.FirstOrDefault(item => item.Id == id);
 
         if (item is null)
             return false;

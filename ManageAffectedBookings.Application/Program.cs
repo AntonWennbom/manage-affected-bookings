@@ -1,1 +1,3 @@
-﻿Console.WriteLine("Hello!");
+﻿using ManageAffectedBookings.Application.Application;
+
+UnavailableEquipmentFlow.Run();

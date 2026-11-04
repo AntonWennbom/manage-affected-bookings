@@ -307,14 +307,18 @@ eller
 
 Bokningens slutdatum >= dagens datum
 
-Det blir påverkan på implementationen
+Det blir påverkan på implementatione
 
 ---
 
 ## Ändringar efter under period 2
 
+* jag har nu insätt att jag gör bäst i att sätta att den kollar behörighet direkt, innan man får tillgång att sätta ett exemplar som otillgängligt. 
+Jag måste göra de ändringarna i mina diagram, samt när jag implementerar koden. 
 
+* Lägga till titel i diagrammen.
 
+* Lägga till repeat om orsak inte är angiven
 
 autonumber
 activate

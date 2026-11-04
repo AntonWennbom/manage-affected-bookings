@@ -51,7 +51,7 @@ public static class SeedData
 
 public static List<Booking> Bookings =>
     [
-            // Ska visas
+    // Ska visas vid val av utrustning 1
     new()
     {
         Id = Guid.NewGuid(),
@@ -65,7 +65,7 @@ public static List<Booking> Bookings =>
         }
     },
 
-    // Ska visas
+    // Ska visas vid val av utrustning 1
     new()
     {
         Id = Guid.NewGuid(),
@@ -125,7 +125,7 @@ public static List<User> Users =>
         Name = "Erik Eriksson",
         Email = "erik@test.se",
         Phone = "070-2222222",
-        Role = Roles.Customer
+        Role = Roles.Employee
     },
 
     new()
@@ -134,7 +134,15 @@ public static List<User> Users =>
         Name = "Pelle Personal",
         Email = "pelle@company.se",
         Phone = "070-3333333",
-        Role = Roles.Employee
+        Role = Roles.Admin
+    },
+    new()
+    {
+        Id = Guid.Parse("10000000-0000-0000-0000-000000000004"),
+        Name = "Kund Kundsson",
+        Email = "kund@company.se",
+        Phone = "070-3333333",
+        Role = Roles.Customer
     }
     ];
 }
