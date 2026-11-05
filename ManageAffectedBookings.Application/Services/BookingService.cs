@@ -5,10 +5,10 @@ namespace ManageAffectedBookings.Application.Services;
 
 public class BookingService(
     List<Booking> bookings,
-    List<User> users)
+    List<Customer> customers)
 {
     private readonly List<Booking> _bookings = bookings;
-    private readonly List<User> _users = users;
+    private readonly List<Customer> _customers = customers;
 
     public List<AffectedBooking> GetAffectedBookings(Guid equipmentItemId)
     {
@@ -21,14 +21,14 @@ public class BookingService(
             booking.Status == BookingStatus.Confirmed)
         .Select(booking =>
         {
-            var user = _users
-                .FirstOrDefault(user => user.Id == booking.UserId);
+            var user = _customers
+                .FirstOrDefault(user => user.Id == booking.CustomerId);
 
             return new AffectedBooking(
                 booking.Id,
                 user?.Name ?? "Unknown",
-                user?.Email ?? "Unknown",
-                user?.Phone ?? "Unknown",
+                user?.EmailAdress ?? "Unknown",
+                user?.PhoneNumber ?? "Unknown",
                 booking.Period);
         })];
     }

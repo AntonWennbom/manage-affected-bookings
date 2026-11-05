@@ -9,15 +9,17 @@ public static class UnavailableEquipmentFlow
 {
     private static BookingService _bookingService = null!;
     private static EquipmentService _equipmentService = null!;
-    private static User _currentUser = SeedData.Users
+    private static Customer _currentUser = SeedData.Users
     .First(user => user.Role == Roles.Employee);
 
-    public static void Run()
+    public static void Run(BookingService bookingService, EquipmentService equipmentService)
     {
-        SetupServices();
+        _bookingService = bookingService;
+        _equipmentService = equipmentService;
 
         Console.WriteLine("Unavailable Equipment Flow");
         Console.WriteLine("--------------------------");
+
         SelectDemoUser();
 
         var equipmentItem = new EquipmentItem();
@@ -33,7 +35,7 @@ public static class UnavailableEquipmentFlow
             Console.WriteLine(exception.Message);
         }
 
-        var equipment = GetEquipmentItemById(equipmentItem.EquipmentId);
+        var equipment = _equipmentService.GetEquipmentById(equipmentItem.EquipmentId);
 
         if (equipment is null)
         {
@@ -62,6 +64,28 @@ public static class UnavailableEquipmentFlow
         }
 
         ShowAffectedBookings(equipmentItem);
+
+        var itemAsUnavailable = _equipmentService.MarkUnavailable(equipmentItem.Id, reason);
+
+        var updatedEquipmentItem = _equipmentService.GetEquipmentItemById(equipmentItem.Id);
+        var updatedEquipment = _equipmentService.GetEquipmentById(equipmentItem.EquipmentId);
+
+        if (updatedEquipmentItem is null)
+        {
+            Console.WriteLine("Error: Equipment item not found after update.");
+            return;
+        }
+
+        if (updatedEquipment is null)
+        {
+            Console.WriteLine("Error: Equipment not found after update.");
+            return;
+        }
+
+        Console.WriteLine();
+        Console.WriteLine("------Updated Item------");
+        Console.WriteLine($"{updatedEquipment.Name} ({updatedEquipmentItem.Status} for reason: {updatedEquipmentItem.UnavailableReason})");
+
         Console.ReadLine();
     }
 
@@ -92,12 +116,14 @@ public static class UnavailableEquipmentFlow
 
         else
         {
+            Console.WriteLine();
             Console.WriteLine("############### Affected Bookings - Contact customer if necessary to cancel booking ###############");
 
             foreach (var booking in affectedBookings)
             {
+                Console.WriteLine();
                 Console.WriteLine("##################################");
-
+                Console.WriteLine();
                 Console.WriteLine($"""
         Affected Booking: {booking.bookingId}
         Customer Name: {booking.CustomerName}
@@ -136,27 +162,9 @@ public static class UnavailableEquipmentFlow
         Console.WriteLine("--------------------------");
     }
 
-    private static void SetupServices()
-    {
-        _bookingService =
-            new BookingService(SeedData.Bookings, SeedData.Users);
 
-        _equipmentService =
-            new EquipmentService(SeedData.EquipmentItems);
-    }
 
-    private static Equipment? GetEquipmentItemById(Guid id)
-    {
-        var item = SeedData.Equipments.FirstOrDefault(equipment => equipment.Id == id);
-        if (item is null)
-        {
-            Console.WriteLine($"Equipment item with ID {id} not found.");
-            return null;
-        }
-        return item;
-    }
-
-    private static bool UserHasPermission(User user)
+    private static bool UserHasPermission(Customer user)
     {
         return user.Role == Roles.Employee || user.Role == Roles.Admin;
     }

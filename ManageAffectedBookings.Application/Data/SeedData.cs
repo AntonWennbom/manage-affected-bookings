@@ -49,19 +49,19 @@ public static class SeedData
     }
     ];
 
-public static List<Booking> Bookings =>
-    [
-    // Ska visas vid val av utrustning 1
-    new()
+    public static List<Booking> Bookings =>
+        [
+        // Ska visas vid val av utrustning 1
+        new()
     {
         Id = Guid.NewGuid(),
         EquipmentItem = EquipmentItems[0],
-        UserId = Users[0].Id,
+        CustomerId = Users[0].Id,
         Status = BookingStatus.Confirmed,
         Period = new BookingPeriod
         {
             Start = DateOnly.FromDateTime(DateTime.Today.AddDays(7)),
-        End = DateOnly.FromDateTime(DateTime.Today.AddDays(10))
+            End = DateOnly.FromDateTime(DateTime.Today.AddDays(10))
         }
     },
 
@@ -70,7 +70,7 @@ public static List<Booking> Bookings =>
     {
         Id = Guid.NewGuid(),
         EquipmentItem = EquipmentItems[0],
-        UserId = Users[1].Id,
+        CustomerId = Users[1].Id,
         Status = BookingStatus.Confirmed,
         Period = new BookingPeriod
         {
@@ -84,7 +84,7 @@ public static List<Booking> Bookings =>
     {
         Id = Guid.NewGuid(),
         EquipmentItem = EquipmentItems[0],
-        UserId = Users[0].Id,
+        CustomerId = Users[0].Id,
         Status = BookingStatus.Cancelled,
         Period = new BookingPeriod
         {
@@ -98,7 +98,7 @@ public static List<Booking> Bookings =>
     {
         Id = Guid.NewGuid(),
         EquipmentItem = EquipmentItems[0],
-        UserId = Users[1].Id,
+        CustomerId = Users[1].Id,
         Status = BookingStatus.Completed,
         Period = new BookingPeriod
         {
@@ -106,16 +106,16 @@ public static List<Booking> Bookings =>
             End = DateOnly.FromDateTime(DateTime.Today.AddDays(-5))
         }
     }
-    ];
+        ];
 
-public static List<User> Users =>
-    [
-         new()
+    public static List<Customer> Users =>
+        [
+             new()
     {
         Id = Guid.Parse("10000000-0000-0000-0000-000000000001"),
         Name = "Anna Andersson",
-        Email = "anna@test.se",
-        Phone = "070-1111111",
+        EmailAdress = "anna@test.se",
+        PhoneNumber = "070-1111111",
         Role = Roles.Customer
     },
 
@@ -123,8 +123,8 @@ public static List<User> Users =>
     {
         Id = Guid.Parse("10000000-0000-0000-0000-000000000002"),
         Name = "Erik Eriksson",
-        Email = "erik@test.se",
-        Phone = "070-2222222",
+        EmailAdress = "erik@test.se",
+        PhoneNumber = "070-2222222",
         Role = Roles.Employee
     },
 
@@ -132,17 +132,17 @@ public static List<User> Users =>
     {
         Id = Guid.Parse("10000000-0000-0000-0000-000000000003"),
         Name = "Pelle Personal",
-        Email = "pelle@company.se",
-        Phone = "070-3333333",
+        EmailAdress = "pelle@company.se",
+        PhoneNumber = "070-3333333",
         Role = Roles.Admin
     },
     new()
     {
         Id = Guid.Parse("10000000-0000-0000-0000-000000000004"),
         Name = "Kund Kundsson",
-        Email = "kund@company.se",
-        Phone = "070-3333333",
+        EmailAdress = "kund@company.se",
+        PhoneNumber = "070-3333333",
         Role = Roles.Customer
     }
-    ];
+        ];
 }
