@@ -22,7 +22,7 @@ public static class UnavailableEquipmentFlow
 
         SelectDemoUser();
 
-        var equipmentItem = new EquipmentItem();
+        EquipmentItem equipmentItem;
 
         try
         {
@@ -33,6 +33,7 @@ public static class UnavailableEquipmentFlow
         {
 
             Console.WriteLine(exception.Message);
+            return;
         }
 
         var equipment = _equipmentService.GetEquipmentById(equipmentItem.EquipmentId);
@@ -55,17 +56,22 @@ public static class UnavailableEquipmentFlow
 
         try
         {
-            _equipmentService.MarkUnavailable(equipmentItem.Id, reason!);
+            var marked = _equipmentService.MarkUnavailable(equipmentItem.Id, reason);
+
+            if (!marked)
+            {
+                Console.WriteLine("Equipment item not found. Nothing was saved.");
+                return;
+            }
             Console.WriteLine($"Equipment Item '{equipment.Name}' marked as unavailable for reason: {reason}");
         }
         catch (ArgumentException exception)
         {
             Console.WriteLine(exception.Message);
+            return;
         }
 
         ShowAffectedBookings(equipmentItem);
-
-        var itemAsUnavailable = _equipmentService.MarkUnavailable(equipmentItem.Id, reason);
 
         var updatedEquipmentItem = _equipmentService.GetEquipmentItemById(equipmentItem.Id);
         var updatedEquipment = _equipmentService.GetEquipmentById(equipmentItem.EquipmentId);

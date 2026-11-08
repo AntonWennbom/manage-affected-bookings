@@ -1,6 +1,6 @@
 ﻿using ManageAffectedBookings.Application.Models;
 
-namespace ManageAffectedBookings.Application.Services;
+namespace ManageAffectedBookings.Application.Records;
 
 public record AffectedBooking
     (

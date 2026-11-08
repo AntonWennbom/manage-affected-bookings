@@ -105,6 +105,20 @@ public static class SeedData
             Start = DateOnly.FromDateTime(DateTime.Today.AddDays(-10)),
             End = DateOnly.FromDateTime(DateTime.Today.AddDays(-5))
         }
+    },
+
+    // Ska filtreras bort (längre fram i tiden än 5 år)
+    new()
+    {
+        Id = Guid.NewGuid(),
+        EquipmentItem = EquipmentItems[0],
+        CustomerId = Users[1].Id,
+        Status = BookingStatus.Confirmed,
+        Period = new BookingPeriod
+        {
+            Start = DateOnly.FromDateTime(DateTime.Today.AddYears(5).AddDays(1)),
+            End = DateOnly.FromDateTime(DateTime.Today.AddYears(5).AddDays(2))
+        }
     }
         ];
 

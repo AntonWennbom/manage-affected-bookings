@@ -347,3 +347,12 @@ Hur implementationens objekt och metodanrop motsvarar sekvensdiagrammet.
 Om ansvarsfördelningen fungerade som tänkt.
 Vilka förändringar du gjorde och varför.
 Om implementationen visar att designen behöver ändras ska du uppdatera diagrammen. Redovisa vad som ändrades och motivera beslutet. Vilket är något som även tas med i grupparbetet sen under punkt 6.
+
+
+
+Diskussion för iterationsmöte 2
+jag tog bort VR 13 ifrån min feature då jag kände att den inte direkt var kopplad.
+Jag la även till FK12 – Markera exemplar som otillgängligt
+Koppling: K09
+Systemet ska låta personal markera ett exemplar som otillgängligt och ange orsak.
+i min feature 

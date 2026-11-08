@@ -34,7 +34,6 @@ public class EquipmentService(List<EquipmentItem> items, List<Equipment> equipme
         var item = _equipments.FirstOrDefault(equipment => equipment.Id == id);
         if (item is null)
         {
-            Console.WriteLine($"Equipment item with ID {id} not found.");
             return null;
         }
         return item;
