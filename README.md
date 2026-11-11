@@ -3,11 +3,11 @@
 
 Instruktioner för att köra programmet.
 * Klona repositoryt, Solution inehåller endast ett projekt, en console-applilkation. Det är den som ska vara startup projekt, ManageAffectedBookings.Application.
-* Kör applikationen.
+* Kör applikationen och följ instruktionerna.
 
-Kör projektet och följ instruktionerna.
+## Huvudflöde och Alternativa flöden
 
-* Välj användare giltiga val (1,2,3).
+* Välj användare, giltiga val (1,2,3).
 * Välj utrustning för körningen, det står listat hur många berörda bokningar de olika utrustningarna har.
 * Om du valde Customer avslutas flödet här då denne inte har behörighet att ändra status. 
 * Nu ska den valda utrustningen sättas till otillgänglig, ange en orsak, (måste vara ifylld).
